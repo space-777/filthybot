@@ -23,6 +23,11 @@ async def on_ready():
 @client.command()
 async def ping():
     await client.say('pong')
+    
+@client.command()
+async def shutdown():
+    await client.close()
+
 
 
 
