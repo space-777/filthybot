@@ -31,6 +31,4 @@ async def shutdown():
 
 
 
-
-
 client.run(TOKEN)
