@@ -37,7 +37,7 @@ async def shutdown():
     await client.close()
     
 @client.command()
-async def restart()
+async def restart():
     restart_program()
     await client.close()
     
