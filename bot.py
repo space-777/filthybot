@@ -1,11 +1,15 @@
 import discord
 from discord.ext import commands
+from osuapi import OsuApi, AHConnector
+import aiohttp
+import asyncio
 
 
 TOKEN = 'NDg4NzMxMDE2NTY0MDQ3ODgz.DngeQQ.egVl3OgvvifBWBaNZeN9nR8QP1I'
 
 
 client = commands.Bot(command_prefix = '!f')
+
 
 
 @client.event
@@ -19,6 +23,9 @@ async def on_ready():
 @client.command()
 async def ping():
     await client.say('pong')
+
+
+
 
 
 client.run(TOKEN)
