@@ -27,8 +27,6 @@ async def ping():
 @client.command()
 async def shutdown():
     await client.close()
-
-
-
+    
 
 client.run(TOKEN)
