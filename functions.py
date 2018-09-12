@@ -5,7 +5,7 @@ import requests
 import os
 import sys
 
-apicode="f204be241ebeebf29ccf56a77dd7bd9b36d96d45"
+apicode="92a4871f7a42d7015d58a9acf3dda2f662ba28db"
 api = OsuApi(apicode, connector=ReqConnector())
 
 
