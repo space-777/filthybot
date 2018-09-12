@@ -4,10 +4,10 @@ from osuapi import OsuApi, ReqConnector
 import requests
 import os
 import sys
+from functions import *
 
-
-TOKEN = 'NDg4NzMxMDE2NTY0MDQ3ODgz.DngeQQ.egVl3OgvvifBWBaNZeN9nR8QP1I'
-apicode="92a4871f7a42d7015d58a9acf3dda2f662ba28db"
+TOKEN = 'NDg4NzIxMTU2ODU4MTgzNzAw.DnrYaQ.koaFJTVMTSVU3jd81k_lgwAKZ78'
+apicode="f204be241ebeebf29ccf56a77dd7bd9b36d96d45"
 api = OsuApi(apicode, connector=ReqConnector())
 
 client = commands.Bot(command_prefix = '!f')
@@ -43,11 +43,15 @@ async def restart():
 
 @client.command(pass_context=True)
 async def osu(context,param):
-    profile=api.get_user(param)
-    tit="Osu Profile for "+param
-    desc="Username: "+profile[0].username+"\n"+"PP: "+str(profile[0].pp_raw)+"\n"+"Rank: "+str(profile[0].pp_rank)+"\n"+"Playcount: "+str(profile[0].playcount)
-    em = discord.Embed(title= tit, description=desc, colour=0xDEADBF)
+
+    em=display(param)
     await client.send_message(context.message.channel, embed=em)
-    
+
+
+@client.command(pass_context=True)
+async def top(context,user,amt=50):
+    scores=ret50(user,val=amt)
+    em=scoredisp(user,scores,amt)
+    await client.send_message(context.message.channel, embed=em)
 
 client.run(TOKEN)
