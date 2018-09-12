@@ -1,14 +1,14 @@
 import discord
 from discord.ext import commands
-from osuapi import OsuApi, AHConnector
-import aiohttp
-import asyncio
+from osuapi import OsuApi, ReqConnector
+import requests
 import os
 import sys
 
 
 TOKEN = 'NDg4NzMxMDE2NTY0MDQ3ODgz.DngeQQ.egVl3OgvvifBWBaNZeN9nR8QP1I'
-
+apicode="92a4871f7a42d7015d58a9acf3dda2f662ba28db"
+api = OsuApi(apicode, connector=ReqConnector())
 
 client = commands.Bot(command_prefix = '!f')
 
@@ -40,6 +40,14 @@ async def shutdown():
 async def restart():
     restart_program()
     await client.close()
+
+@client.command(pass_context=True)
+async def osu(context,param):
+    profile=api.get_user(param)
+    tit="Osu Profile for "+param
+    desc="Username: "+profile[0].username+"\n"+"PP: "+str(profile[0].pp_raw)+"\n"+"Rank: "+str(profile[0].pp_rank)+"\n"+"Playcount: "+str(profile[0].playcount)
+    em = discord.Embed(title= tit, description=desc, colour=0xDEADBF)
+    await client.send_message(context.message.channel, embed=em)
     
 
 client.run(TOKEN)
