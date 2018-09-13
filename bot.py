@@ -12,8 +12,8 @@ Token_read = open("Token.txt")
 api_read = open("osuapikey.txt")
 
 
-TOKEN = Token_read.readline()
-apicode = api_read.readline()
+TOKEN = Token_read.readline().strip()
+apicode = api_read.readline().strip()
 
 import json
 
@@ -110,4 +110,9 @@ async def set(ctx, param):
         await client.say('invalid username')
 
 
+@client.command(pass_context=True)
+async def compare(ctx,user1,user2):
+	em = check(user1,user2)
+	await client.send_message(context.message.channel, embed=em)
+	
 client.run(TOKEN)

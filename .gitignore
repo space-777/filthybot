@@ -1,13 +1,7 @@
-Lib/*
-Scripts/*
-__pycache__
-Location.py
-Pipfile
-pip-selfcheck.json
-Pipfile.lock
-pyenv.cfg
+token.txt
 osuapikey.txt
 Token.txt
 test.py
 token2.txt
 .gitignore
+records.json
