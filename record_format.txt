@@ -1,0 +1,13 @@
+{
+  discord_id: {
+    "user_id": _id,
+    "days": 0,
+    "total": 0
+  }
+}
+
+this file just to show how records are stored
+discord_id - string
+osu_id - int
+days - int
+total - int
