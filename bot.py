@@ -33,7 +33,7 @@ def restart_program():
 
 @client.event
 async def on_ready():
-    ready_message = "Logged in as" + client.user.name + "\n ID:" + client.user.id
+    ready_message = "Logged in as " + client.user.name + "\n ID:" + client.user.id
     print(ready_message)
 
 
