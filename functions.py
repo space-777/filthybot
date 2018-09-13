@@ -15,7 +15,7 @@ api = OsuApi(apicode, connector=ReqConnector())
 def display_profile(context, param):
     profile = api.get_user(param)
     Usertitle = "Osu Profile for " + profile[0].username
-    thum = "https://a.ppy.sh/"+str(profile[0].user_id)+"?1528809158.jpeg"
+    thum = "https://a.ppy.sh/"+str(p	rofile[0].user_id)+"?1528809158.jpeg"
     user_url = "https://osu.ppy.sh/users/"+str(profile[0].user_id)
     embed = discord.Embed(title=Usertitle, timestamp=datetime.datetime.utcnow(),
                           url=user_url,
