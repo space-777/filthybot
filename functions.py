@@ -5,6 +5,8 @@ import requests
 import os
 import sys
 import datetime
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 api_read = open("osuapikey.txt")
 apicode = api_read.readline()
@@ -110,3 +112,33 @@ def check(user1,user2):
 	em = discord.Embed(title= tit, description=desc, colour=0xDEADBF)
 	return em
 
+
+def time_elapsed(datestr):
+    parsed_date = datetime.strptime(datestr, "%Y-%m-%d %H:%M:%S")
+    today = datetime.utcnow()
+
+    time_delta = relativedelta(today, parsed_date)
+
+    years = abs(time_delta.years)
+    months = abs(time_delta.months)
+    days = abs(time_delta.days)
+    hours = abs(time_delta.hours)
+    minutes = abs(time_delta.minutes)
+    seconds = abs(time_delta.seconds)
+
+    time_elapsed = ""
+
+    if (years > 0):
+        time_elapsed.append("{} year{}, ".format(years, "s" if years!=1 else ""))
+    if (months > 0):
+        time_elapsed.append("{} month{}, ".format(months, "s" if months!=1 else ""))
+    if (days > 0):
+        time_elapsed.append("{} day{}, ".format(days, "s" if days!=1 else ""))
+    if (hours > 0):
+        time_elapsed.append("{} hour{}, ".format(hours, "s" if hours!=1 else ""))
+    if (minutes > 0):
+        time_elapsed.append("{} minute{}, ".format(minutes, "s" if minutes!=1 else ""))
+    if (seconds > 0):
+        time_elapsed.append("{} second{} ago".format(seconds, "s" if seconds!=1 else ""))
+
+    return time_elapsed
