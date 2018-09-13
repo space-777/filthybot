@@ -1,6 +1,6 @@
 import os
 import sys
-
+import Location
 import discord
 from discord.ext import commands
 
@@ -9,11 +9,7 @@ from functions import *
 from osuapi import OsuApi, ReqConnector
 
 Token_read = open("Token.txt")
-api_read = open("osuapikey.txt")
-
-
 TOKEN = Token_read.readline()
-apicode = api_read.readline()
 
 api = OsuApi(apicode, connector=ReqConnector())
 
