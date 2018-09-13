@@ -8,10 +8,12 @@ import requests
 from functions import *
 from osuapi import OsuApi, ReqConnector
 
+api_read = open("osuapikey.txt")
 Token_read = open("Token.txt")
-TOKEN = Token_read.readline()
 
-api = OsuApi(apicode, connector=ReqConnector())
+TOKEN = Token_read.readline()
+apicode = api_read.readline()
+
 
 client = commands.Bot(command_prefix='!f')
 
@@ -36,7 +38,7 @@ async def ping():
 
 
 @client.command()
-async def shutdown():
+async def sd():
     await client.logout()
 
 
@@ -47,10 +49,16 @@ async def restart():
 
 
 @client.command(pass_context=True)
-async def osu(context, param):
-
-    em = display(param)
-    await client.send_message(context.message.channel, embed=em)
+async def osu(context, *param):
+    if len(param) == 0:
+        await client.say("**Provide a Username(s)**")
+    elif len(param) == 1:
+        embed = display_profile(context, param)
+        await client.send_message(context.message.channel, embed=embed)
+    else:
+        for var in param:
+            embed = display_profile(context, var)
+            await client.send_message(context.message.channel, embed=embed)
 
 
 @client.command(pass_context=True)
