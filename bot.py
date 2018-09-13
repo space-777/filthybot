@@ -57,7 +57,12 @@ async def restart():
 @client.command(pass_context=True) #Completed with Rich embed. Todo: Add Local Search -- Arulson will take care of that.
 async def osu(context, *param):
     if len(param) == 0:
-        await client.say("**Provide a Username(s)**")
+        #await client.say("**Provide a Username(s)**")
+        with open('records.json') as f:
+            data = json.load(f)
+        id = data[context.message.author.id]["user_id"]
+        embed = display_profile(id)
+        await client.send_message(context.message.channel, embed=embed)
     elif len(param) == 1:
         embed = display_profile(param)
         await client.send_message(context.message.channel, embed=embed)
@@ -65,7 +70,6 @@ async def osu(context, *param):
         for var in param:
             embed = display_profile(var)
             await client.send_message(context.message.channel, embed=embed)
-
 
 @client.command(pass_context=True)
 async def top(context, user, amt=5):
