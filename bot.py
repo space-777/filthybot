@@ -9,7 +9,7 @@ from functions import *
 
 from osuapi import OsuApi, ReqConnector
 
-Token_read = open("Token.txt")
+Token_read = open("token.txt")
 api_read = open("osuapikey.txt")
 
 
@@ -61,11 +61,16 @@ async def osu(context, param):
 
 
 @client.command(pass_context=True)
-async def top(context, user, amt=50):
-    scores = ret50(user, val=amt)
+async def top(context, user, amt=5):
+    scores = api.get_user_best(user,limit=amt)
     em = scoredisp(user, scores, amt)
     await client.send_message(context.message.channel, embed=em)
 
+@client.command(pass_context=True)
+async def recent(context, param, amt=5):
+    scores = api.get_user_recent(param,limit=amt)
+    em = recentdisp(param, scores, amt)
+    await client.send_message(context.message.channel, embed=em)
 
 @client.command(pass_context=True)
 async def set(ctx,param):
@@ -93,6 +98,9 @@ async def set(ctx,param):
 
     except IndexError:
         await client.say('invalid username')
+
+
+    
 
 
 client.run(TOKEN)
