@@ -1,6 +1,6 @@
 {
-  osu_id: {
-    "discord_id": discord_id,
+  discord_id: {
+    "osu_id": osu_id,
     "days": 0,
     "total": 0
   }
