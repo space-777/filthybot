@@ -32,7 +32,7 @@ def restart_program():
 
 @client.event
 async def on_ready():
-    ready_message = "Logged in as" + client.user.name + "\n ID:" + client.user.id
+    ready_message = "Logged in as " + client.user.name + "\n ID:" + client.user.id
     print(ready_message)
 
 
@@ -53,9 +53,15 @@ async def restart():
 
 
 @client.command(pass_context=True)
-async def osu(context, param):
-
-    em = display(param)
+async def osu(context, param='xD'):
+    if param != 'xD':
+        em = display(param)
+    else:
+        with open('records.json') as f:
+            data = json.load(f)
+        id = data[context.message.author.id]["user_id"]
+        print(id)
+        em = display(id)
     await client.send_message(context.message.channel, embed=em)
 
 
@@ -79,16 +85,16 @@ async def set(ctx,param):
     '''
     try:
         user_id=api.get_user(param)[0].user_id
-        discord_id=ctx.message.author.id   # Discord iD
+        discord_id=ctx.message.author.id   # Discord id
         new_data = {
-            'discord_id': discord_id,
+            'user_id': user_id,
             'days': 0,   # Days of filthy farmer left
             'total': 0  # Total days of filthy farmer earned
         }
 
         with open('records.json') as f:
             data = json.load(f)
-        data[str(user_id)] = new_data
+        data[str(discord_id)] = new_data
         with open('records.json', 'w') as f:
             json.dump(data, f, indent=2)
         tit = 'succesfully set {} IGN as {}'.format(ctx.message.author, param)
