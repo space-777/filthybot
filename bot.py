@@ -9,7 +9,7 @@ from functions import *
 
 from osuapi import OsuApi, ReqConnector
 
-Token_read = open("token.txt")
+Token_read = open("Token.txt")
 api_read = open("osuapikey.txt")
 
 
@@ -54,7 +54,7 @@ async def restart():
     await client.close()
 
 
-@client.command(pass_context=True)
+@client.command(pass_context=True) #Completed with Rich embed. Todo: Add Local Search -- Arulson will take care of that.
 async def osu(context, *param):
     if len(param) == 0:
         await client.say("**Provide a Username(s)**")
@@ -69,16 +69,14 @@ async def osu(context, *param):
 
 @client.command(pass_context=True)
 async def top(context, user, amt=5):
-    scores = api.get_user_best(user, limit=amt)
-    em = scoredisp(user, scores, amt)
-    await client.send_message(context.message.channel, embed=em)
+    embed = Top_Scores(context, user, amt)
+    await client.send_message(context.message.channel, embed=embed)
 
 
-@client.command(pass_context=True)
+@client.command(pass_context=True) #Completed With Rich Embed.
 async def recent(context, param, amt=5):
-    scores = api.get_user_recent(param, limit=amt)
-    em = recentdisp(param, scores, amt)
-    await client.send_message(context.message.channel, embed=em)
+    embed = recent_Scores(param, amt)
+    await client.send_message(context.message.channel, embed=embed)
 
 
 @client.command(pass_context=True)
