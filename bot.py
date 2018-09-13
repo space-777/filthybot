@@ -43,7 +43,7 @@ async def ping():
 
 
 @client.command()
-async def sd():
+async def shutdown():
     await client.logout()
 
 
