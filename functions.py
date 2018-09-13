@@ -13,7 +13,7 @@ api = OsuApi(apicode, connector=ReqConnector())
 def display(param):
 	profile=api.get_user(param)
 	print(profile)
-	tit="Osu Profile for "+param
+	tit="Osu Profile for "+profile[0].username
 	desc="Username: "+profile[0].username+"\n"+"PP: "+str(profile[0].pp_raw)+"\n"+"Rank: "+str(profile[0].pp_rank)+"\n"+"Playcount: "+str(profile[0].playcount)
 	em = discord.Embed(title= tit, description=desc, colour=0xDEADBF)
 	return em
