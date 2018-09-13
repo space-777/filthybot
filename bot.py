@@ -1,14 +1,24 @@
-import discord
-from discord.ext import commands
-from osuapi import OsuApi, ReqConnector
-import requests
 import os
 import sys
+
+import discord
+from discord.ext import commands
+
+import requests
 from functions import *
+
+from osuapi import OsuApi, ReqConnector
+
+Token_read = open("Token.txt")
+api_read = open("osuapikey.txt")
+
+
+TOKEN = Token_read.readline()
+apicode = api_read.readline()
+
 import json
 
-TOKEN = 'NDg4NzMxMDE2NTY0MDQ3ODgz.DngeQQ.egVl3OgvvifBWBaNZeN9nR8QP1I'
-apicode="92a4871f7a42d7015d58a9acf3dda2f662ba28db"
+
 api = OsuApi(apicode, connector=ReqConnector())
 
 client = commands.Bot(command_prefix = 'f!')
@@ -23,36 +33,37 @@ def restart_program():
 
 @client.event
 async def on_ready():
-    print('Logged in as')
-    print(client.user.name)
-    print(client.user.id)
-    print('------')
+    ready_message = "Logged in as" + client.user.name + "\n ID:" + client.user.id
+    print(ready_message)
 
 
 @client.command()
 async def ping():
     await client.say('pong')
-    
+
+
 @client.command()
 async def shutdown():
-    await client.close()
-    
+    await client.logout()
+
+
 @client.command()
 async def restart():
     restart_program()
     await client.close()
 
-@client.command(pass_context=True)
-async def osu(context,param):
 
-    em=display(param)
+@client.command(pass_context=True)
+async def osu(context, param):
+
+    em = display(param)
     await client.send_message(context.message.channel, embed=em)
 
 
 @client.command(pass_context=True)
-async def top(context,user,amt=50):
-    scores=ret50(user,val=amt)
-    em=scoredisp(user,scores,amt)
+async def top(context, user, amt=50):
+    scores = ret50(user, val=amt)
+    em = scoredisp(user, scores, amt)
     await client.send_message(context.message.channel, embed=em)
 
 

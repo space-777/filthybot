@@ -1,0 +1,10 @@
+Lib/*
+Scripts/*
+__pycache__
+Location.py
+Pipfile
+pip-selfcheck.json
+Pipfile.lock
+pyenv.cfg
+osuapikey.txt
+Token.txt
